@@ -31,54 +31,61 @@ class _MysdmsgState extends State<Mysdmsg> {
   DateTime now = DateTime.now();
 
   _MysdmsgState(this.colorb, this.colorw);
+
   gotocam() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Expanded(
-            child: Container(
-              color: Color(0xFFCAC3C3),
-              child: Row(
-                children: [
-                  Spacer(),
-                  IconButton(
-                      color: widget.colorw,
-                      icon: Icon(
-                        Icons.add_photo_alternate_sharp,
-                        color: colorw,
-                      ),
-                      onPressed: () {
-                        getcamr(ImageSource.gallery);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Upload photo"),
+          content: Row(
+            children: [
+              Spacer(),
+              IconButton(
+                  color: widget.colorw,
+                  icon: Icon(
+                    Icons.add_photo_alternate_sharp,
+                    color: colorw,
+                  ),
+                  onPressed: () {
+                    getcamr(ImageSource.gallery);
+                    Navigator.of(context).pop();
+                  }),
+              IconButton(
+                  color: widget.colorw,
+                  icon: Icon(
+                    Icons.add_a_photo,
+                    color: colorw,
+                  ),
+                  onPressed: () {
+                    getcamr(ImageSource.camera);
+                    Navigator.of(context).pop();
+                  }),
+              Spacer(),
+              if (imagepht != null)
+                IconButton(
+                    color: widget.colorw,
+                    icon: Icon(
+                      Icons.cancel_rounded,
+                      color: colorw,
+                    ),
+                    onPressed: () {
+                      setState(() {
                         Navigator.of(context).pop();
-                      }),
-                  IconButton(
-                      color: widget.colorw,
-                      icon: Icon(
-                        Icons.add_a_photo,
-                        color: colorw,
-                      ),
-                      onPressed: () {
-                        getcamr(ImageSource.camera);
-                        Navigator.of(context).pop();
-                      }),
-                  Spacer(),
-                  if (imagepht != null)
-                    IconButton(
-                        color: widget.colorw,
-                        icon: Icon(
-                          Icons.cancel_rounded,
-                          color: colorw,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            Navigator.of(context).pop();
-                          });
-                        }),
-                ],
-              ),
-            ),
-          );
-        });
+                      });
+                    }),
+            ],
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text("Cancel"))
+          ],
+        );
+      },
+    );
   }
 
   _sendmsg(String msgg, imagepathh, msgphotoo) async {
