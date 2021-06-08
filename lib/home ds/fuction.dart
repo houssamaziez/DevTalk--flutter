@@ -3,7 +3,7 @@ import 'package:f3/home%20ds/sdcam.dart';
 
 import 'package:flutter/material.dart';
 
-bool isjame = true;
+bool isjame = false;
 
 ondelete(id, lang) async {
   await FirebaseFirestore.instance

@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -42,20 +41,20 @@ class _MysdmsgState extends State<Mysdmsg> {
             children: [
               Spacer(),
               IconButton(
-                  color: widget.colorw,
+                  color: Colors.black,
                   icon: Icon(
                     Icons.add_photo_alternate_sharp,
-                    color: colorw,
+                    color: Colors.black,
                   ),
                   onPressed: () {
                     getcamr(ImageSource.gallery);
                     Navigator.of(context).pop();
                   }),
               IconButton(
-                  color: widget.colorw,
+                  color: Colors.black,
                   icon: Icon(
                     Icons.add_a_photo,
-                    color: colorw,
+                    color: Colors.black,
                   ),
                   onPressed: () {
                     getcamr(ImageSource.camera);

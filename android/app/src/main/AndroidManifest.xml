@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
    <application
-        android:label="pfe prototype1"
+        android:label="DT"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

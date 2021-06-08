@@ -223,6 +223,7 @@ class _MyHomeState extends State<MyHome> {
 
         final docc = snapshot.data.docs;
         final userrr = FirebaseAuth.instance.currentUser;
+
         return ListView.builder(
           reverse: true,
           itemCount: docc.length,
@@ -358,6 +359,7 @@ class _MyHomeState extends State<MyHome> {
         .collection(lang)
         .doc("publc")
         .collection('publc');
+
     return StreamBuilder(
       stream: user.orderBy('date', descending: true).snapshots(),
       builder: (context, snapshot) {
@@ -372,6 +374,7 @@ class _MyHomeState extends State<MyHome> {
         }
 
         final docc = snapshot.data.docs;
+        var userrr = FirebaseAuth.instance.currentUser;
 
         return Expanded(
           child: Container(
@@ -399,7 +402,7 @@ class _MyHomeState extends State<MyHome> {
                           ),
                           child: Center(
                               child: Post(docc, index, lang, context, user,
-                                  chngecolorw, chngecolorb, post)),
+                                  chngecolorw, chngecolorb, post, userrr.uid)),
                         ),
                       ],
                     ),

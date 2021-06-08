@@ -28,6 +28,7 @@ Column masseg(lang, buildStreamBuilder, colorwait, colorblack, isnight) {
 }
 
 class Post extends StatelessWidget {
+  final iduser;
   final colorwht, colorblck, postcolor;
   final docc;
   final index;
@@ -36,7 +37,7 @@ class Post extends StatelessWidget {
   final user;
 
   Post(this.docc, this.index, this.lang, this.contexn, this.user, this.colorwht,
-      this.colorblck, this.postcolor);
+      this.colorblck, this.postcolor, this.iduser);
   @override
   Widget build(BuildContext context) {
     return pokst(docc, index, lang, contexn, user);
@@ -139,14 +140,30 @@ class Post extends StatelessWidget {
                                     IconButton(
                                         icon: Icon(
                                           Icons.star,
-                                          color: isjame ? colorwht : Colors.red,
+                                          color: isjame ? Colors.red : colorwht,
                                         ),
-                                        onPressed: () {}),
+                                        onPressed: () async {
+                                          isjame = !isjame;
+                                          if (isjame == true) {
+                                            await user
+                                                .doc(docc[index].id)
+                                                .update({
+                                              "like": docc[index]["like"] + 1
+                                            });
+                                          }
+                                          if (isjame == false) {
+                                            await user
+                                                .doc(docc[index].id)
+                                                .update({
+                                              "like": docc[index]["like"] - 1
+                                            });
+                                          }
+                                        }),
                                     SizedBox(
                                       width: 5,
                                     ),
                                     Text(
-                                      'Like',
+                                      'Like' + docc[index]["like"].toString(),
                                       style: TextStyle(color: colorwht),
                                     ),
                                   ],
