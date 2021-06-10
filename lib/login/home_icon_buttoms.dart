@@ -55,7 +55,10 @@ class CatigoryW extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute<void>(
-            builder: (BuildContext context) => MyHome(lang, image),
+            builder: (BuildContext context) => MyHome(
+              lang,
+              image,
+            ),
           ),
         );
       },

@@ -1,9 +1,12 @@
+import 'package:f3/home%20ds/Screenhome.dart';
+import 'package:f3/home%20ds/profile/dclrion.dart';
 import 'package:f3/home%20ds/profile/profilz.dart';
 import 'package:f3/scaffold/MyScaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foldable_sidebar/foldable_sidebar.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   final Function closeDrawer;
   final Color colorb;
   final Color colorw;
@@ -19,11 +22,16 @@ class CustomDrawer extends StatelessWidget {
   });
 
   @override
+  _CustomDrawerState createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+  @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return SingleChildScrollView(
       child: Container(
-        color: colorb,
+        color: widget.colorb,
         width: mediaQuery.size.width * 0.60,
         height: mediaQuery.size.height,
         child: Column(
@@ -36,32 +44,36 @@ class CustomDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Image.network(
-                      imaglang,
+                      widget.imaglang,
                       width: 120,
                       height: 120,
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    Text("welcome to $namelan")
+                    Text("welcome to ${widget.namelan}")
                   ],
                 )),
             ListTile(
               onTap: () {
-                var userrr = FirebaseAuth.instance.currentUser.uid;
-
+                final useruid = FirebaseAuth.instance.currentUser.uid;
                 Navigator.push(
                   context,
                   MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>
-                        MyProfile(colorb, colorw, userrr, true),
+                    builder: (BuildContext context) => MyProfile(
+                      widget.colorb,
+                      widget.colorw,
+                      useruid,
+                      true,
+                      false,
+                    ),
                   ),
                 );
               },
-              leading: Icon(Icons.person, color: colorw),
+              leading: Icon(Icons.person, color: widget.colorw),
               title: Text(
                 "Your Profile",
-                style: TextStyle(color: colorw),
+                style: TextStyle(color: widget.colorw),
               ),
             ),
             Divider(
@@ -69,11 +81,58 @@ class CustomDrawer extends StatelessWidget {
               color: Colors.grey,
             ),
             ListTile(
-              onTap: () {},
-              leading: Icon(Icons.settings, color: colorw),
+              onTap: () {
+                setState(() {
+                  nightsstay = !nightsstay;
+                });
+                if (nightsstay == true) {
+                  chngecolorb = chngecolorw;
+                  chngecolorw = Colors.black;
+                  post = Color(0xFFF4F4F4);
+                }
+                if (nightsstay == false) {
+                  chngecolorw = Colors.white;
+                  chngecolorb = Color(0xFF191919);
+                  post = Color(0xFF4D4B4B);
+                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) =>
+                        MyHome(widget.namelan, widget.imaglang),
+                  ),
+                );
+              },
+              leading: IconButton(
+                  icon: nightsstay == true
+                      ? Icon(Icons.nights_stay_outlined)
+                      : Icon(Icons.wb_sunny),
+                  color: chngecolorw,
+                  onPressed: () {
+                    setState(() {
+                      nightsstay = !nightsstay;
+                    });
+                    if (nightsstay == true) {
+                      chngecolorb = chngecolorw;
+                      chngecolorw = Colors.black;
+                      post = Color(0xFFF4F4F4);
+                    }
+                    if (nightsstay == false) {
+                      chngecolorw = Colors.white;
+                      chngecolorb = Color(0xFF3B3B3B);
+                      post = Color(0xFF4D4B4B);
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) =>
+                            MyHome(widget.namelan, widget.imaglang),
+                      ),
+                    );
+                  }),
               title: Text(
-                "Settings",
-                style: TextStyle(color: colorw),
+                "Mode",
+                style: TextStyle(color: widget.colorw),
               ),
             ),
             Divider(
@@ -89,10 +148,10 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 );
               },
-              leading: Icon(Icons.redeem, color: colorw),
+              leading: Icon(Icons.redeem, color: widget.colorw),
               title: Text(
                 "change filiare",
-                style: TextStyle(color: colorw),
+                style: TextStyle(color: widget.colorw),
               ),
             ),
             Divider(
@@ -101,10 +160,10 @@ class CustomDrawer extends StatelessWidget {
             ),
             ListTile(
               onTap: () {},
-              leading: Icon(Icons.save_sharp, color: colorw),
+              leading: Icon(Icons.save_sharp, color: widget.colorw),
               title: Text(
                 "save post ",
-                style: TextStyle(color: colorw),
+                style: TextStyle(color: widget.colorw),
               ),
             ),
             Divider(
@@ -145,10 +204,10 @@ class CustomDrawer extends StatelessWidget {
                   },
                 );
               },
-              leading: Icon(Icons.exit_to_app, color: colorw),
+              leading: Icon(Icons.exit_to_app, color: widget.colorw),
               title: Text(
                 "Log Out",
-                style: TextStyle(color: colorw),
+                style: TextStyle(color: widget.colorw),
               ),
             ),
           ],

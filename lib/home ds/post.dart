@@ -189,8 +189,13 @@ class Post extends StatelessWidget {
                                   context,
                                   MaterialPageRoute<void>(
                                     builder: (BuildContext context) =>
-                                        MyProfile(colorblck, colorwht,
-                                            docc[index]["id"], false),
+                                        MyProfile(
+                                      colorblck,
+                                      colorwht,
+                                      docc[index]["id"],
+                                      false,
+                                      false,
+                                    ),
                                   ),
                                 );
                               },

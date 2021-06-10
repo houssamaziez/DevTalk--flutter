@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MyProfile extends StatelessWidget {
   final colorb;
   final colorw;
-  MyProfile(this.colorb, this.colorw, this.userrr, this.isme);
+  MyProfile(this.colorb, this.colorw, this.userrr, this.isme, this.ismeinhome);
 
   final userrr;
 
   final bool isme;
+  final bool ismeinhome;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,12 +36,13 @@ class MyProfile extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          icon: Icon(Icons.chevron_left,
-                              size: 50, color: colorw)),
+                      if (ismeinhome == false)
+                        IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(Icons.chevron_left,
+                                size: 50, color: colorw)),
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 35, 50, 20),
@@ -49,11 +51,11 @@ class MyProfile extends StatelessWidget {
                             if (isme == true)
                               Text(
                                 "My ",
-                                style: TextStyle(fontSize: 33, color: colorw),
+                                style: TextStyle(fontSize: 22, color: colorw),
                               ),
                             Text(
                               "Profile",
-                              style: TextStyle(fontSize: 33, color: colorw),
+                              style: TextStyle(fontSize: 22, color: colorw),
                             ),
                           ],
                         ),
@@ -74,7 +76,7 @@ class MyProfile extends StatelessWidget {
                               children: [
                                 CircleAvatar(
                                   radius: 74,
-                                  backgroundColor: colorw,
+                                  backgroundColor: Colors.blue,
                                   child: CircleAvatar(
                                     radius: 70,
                                     backgroundImage: NetworkImage(
@@ -100,7 +102,7 @@ class MyProfile extends StatelessWidget {
                               docc["user name"],
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30,
+                                  fontSize: 24,
                                   color: colorw),
                             )
                           ],
@@ -115,13 +117,13 @@ class MyProfile extends StatelessWidget {
                           title: Text(
                             "Name  ",
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: colorw),
                           ),
                           subtitle: Text(
-                            docc["user name"],
-                            style: TextStyle(fontSize: 20, color: colorw),
+                            " " + docc["user name"],
+                            style: TextStyle(fontSize: 17, color: colorw),
                           ),
                           trailing: isme == true
                               ? Icon(Icons.edit, color: colorw)
@@ -141,13 +143,13 @@ class MyProfile extends StatelessWidget {
                           title: Text(
                             "Email  ",
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: colorw),
                           ),
                           subtitle: Text(
-                            docc["email"],
-                            style: TextStyle(fontSize: 20, color: colorw),
+                            " " + docc["email"],
+                            style: TextStyle(fontSize: 17, color: colorw),
                           ),
                           trailing: isme == true
                               ? Icon(Icons.edit, color: colorw)
@@ -167,13 +169,13 @@ class MyProfile extends StatelessWidget {
                           title: Text(
                             "specialty  ",
                             style: TextStyle(
-                                fontSize: 25,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: colorw),
                           ),
                           subtitle: Text(
                             "  App mobil developer ",
-                            style: TextStyle(fontSize: 20, color: colorw),
+                            style: TextStyle(fontSize: 17, color: colorw),
                           ),
                           trailing: isme == true
                               ? Icon(Icons.edit, color: colorw)
@@ -191,13 +193,13 @@ class MyProfile extends StatelessWidget {
                       title: Text(
                         "location  ",
                         style: TextStyle(
-                            fontSize: 25,
+                            fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: colorw),
                       ),
                       subtitle: Text(
                         "  Batna-Algeria ",
-                        style: TextStyle(fontSize: 20, color: colorw),
+                        style: TextStyle(fontSize: 17, color: colorw),
                       ),
                       trailing: isme == true
                           ? Icon(Icons.edit, color: colorw)

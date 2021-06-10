@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f3/home%20ds/post.dart';
+import 'package:f3/home%20ds/profile/dclrion.dart';
 import 'package:f3/home%20ds/profile/profilz.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,10 +20,6 @@ class MyHome extends StatefulWidget {
 
 class _MyHomeState extends State<MyHome> {
   final String imaglang;
-  Color chngecolorb = Colors.white;
-  Color post = Colors.white;
-  Color chngecolorw = Colors.black;
-  bool nightsstay = true;
 
   final String lang;
   FSBStatus drawerStatus;
@@ -49,34 +46,20 @@ class _MyHomeState extends State<MyHome> {
             },
           ),
           backgroundColor: chngecolorb,
-          title: Text(
-            'wlcm to $lang ',
-            style: TextStyle(color: chngecolorw),
-          ),
           actions: [
-            SizedBox(
-              width: 10,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                ' DevTalk ',
+                style: TextStyle(
+                  color: chngecolorw,
+                  fontSize: 30,
+                ),
+              ),
             ),
-            IconButton(
-                icon: nightsstay == true
-                    ? Icon(Icons.nights_stay_outlined)
-                    : Icon(Icons.wb_sunny),
-                color: chngecolorw,
-                onPressed: () {
-                  setState(() {
-                    nightsstay = !nightsstay;
-                  });
-                  if (nightsstay == true) {
-                    chngecolorb = chngecolorw;
-                    chngecolorw = Colors.black;
-                    post = Color(0xFFF4F4F4);
-                  }
-                  if (nightsstay == false) {
-                    chngecolorw = Colors.white;
-                    chngecolorb = Color(0xFF3B3B3B);
-                    post = Color(0xFF4D4B4B);
-                  }
-                }),
+            SizedBox(
+              width: 70,
+            ),
           ],
           bottom: TabBar(
             onTap: (index) {
@@ -132,7 +115,7 @@ class _MyHomeState extends State<MyHome> {
     return TabBarView(
       children: [
         MyProfile(chngecolorb, chngecolorw,
-            FirebaseAuth.instance.currentUser.uid, true),
+            FirebaseAuth.instance.currentUser.uid, false, true),
         messageview(),
         screenHome(),
       ],
@@ -190,7 +173,12 @@ class _MyHomeState extends State<MyHome> {
                       context,
                       MaterialPageRoute<void>(
                         builder: (BuildContext context) => MyProfile(
-                            chngecolorb, chngecolorw, doccs[index].id, false),
+                          chngecolorb,
+                          chngecolorw,
+                          doccs[index].id,
+                          false,
+                          false,
+                        ),
                       ),
                     );
                   },
@@ -286,10 +274,12 @@ class _MyHomeState extends State<MyHome> {
                             context,
                             MaterialPageRoute<void>(
                               builder: (BuildContext context) => MyProfile(
-                                  chngecolorb,
-                                  chngecolorw,
-                                  docc[index]["id"],
-                                  false),
+                                chngecolorb,
+                                chngecolorw,
+                                docc[index]["id"],
+                                false,
+                                false,
+                              ),
                             ),
                           );
                         },

@@ -136,6 +136,7 @@ class _MysdmsgState extends State<Mysdmsg> {
   Future getcamr(cam) async {
     final pikfil = await imagePicker.getImage(
       source: cam,
+      imageQuality: 40,
     );
 
     if (pikfil != null) {
