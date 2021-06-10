@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f3/home%20ds/post.dart';
-import 'package:f3/profile/homeprofile.dart';
+import 'package:f3/home%20ds/profile/profilz.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +79,13 @@ class _MyHomeState extends State<MyHome> {
                 }),
           ],
           bottom: TabBar(
+            onTap: (index) {
+              setState(() {
+                drawerStatus = drawerStatus == FSBStatus.FSB_OPEN
+                    ? FSBStatus.FSB_CLOSE
+                    : FSBStatus.FSB_CLOSE;
+              });
+            },
             indicatorColor: chngecolorw,
             tabs: [
               Tab(
@@ -124,7 +131,8 @@ class _MyHomeState extends State<MyHome> {
   TabBarView buildTabBarView() {
     return TabBarView(
       children: [
-        MyProfile(chngecolorb),
+        MyProfile(chngecolorb, chngecolorw,
+            FirebaseAuth.instance.currentUser.uid, true),
         messageview(),
         screenHome(),
       ],
@@ -176,18 +184,29 @@ class _MyHomeState extends State<MyHome> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return StreamBuilder(builder: (context, snpch) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                  ),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 45,
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute<void>(
+                        builder: (BuildContext context) => MyProfile(
+                            chngecolorb, chngecolorw, doccs[index].id, false),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                    ),
                     child: CircleAvatar(
-                      backgroundColor: chngecolorb,
-                      radius: 28,
-                      backgroundImage: NetworkImage(
-                        doccs[index]["urlimag"],
+                      backgroundColor: Colors.blue,
+                      radius: 45,
+                      child: CircleAvatar(
+                        backgroundColor: chngecolorb,
+                        radius: 28,
+                        backgroundImage: NetworkImage(
+                          doccs[index]["urlimag"],
+                        ),
                       ),
                     ),
                   ),
@@ -261,11 +280,25 @@ class _MyHomeState extends State<MyHome> {
                           : MainAxisAlignment.end,
                   children: [
                     if (docc[index]["id"] != userrr.uid)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            docc[index]["urlimg"],
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => MyProfile(
+                                  chngecolorb,
+                                  chngecolorw,
+                                  docc[index]["id"],
+                                  false),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              docc[index]["urlimg"],
+                            ),
                           ),
                         ),
                       ),

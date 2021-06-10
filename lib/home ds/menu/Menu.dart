@@ -1,3 +1,4 @@
+import 'package:f3/home%20ds/profile/profilz.dart';
 import 'package:f3/scaffold/MyScaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,15 @@ class CustomDrawer extends StatelessWidget {
                 )),
             ListTile(
               onTap: () {
-                debugPrint("Tapped Profile");
+                var userrr = FirebaseAuth.instance.currentUser.uid;
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) =>
+                        MyProfile(colorb, colorw, userrr, true),
+                  ),
+                );
               },
               leading: Icon(Icons.person, color: colorw),
               title: Text(

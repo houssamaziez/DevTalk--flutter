@@ -1,3 +1,4 @@
+import 'package:f3/home%20ds/profile/profilz.dart';
 import 'package:f3/home%20ds/sdmsg.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -182,10 +183,22 @@ class Post extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(docc[index]["urlimg"]),
-                              radius: 24,
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (BuildContext context) =>
+                                        MyProfile(colorblck, colorwht,
+                                            docc[index]["id"], false),
+                                  ),
+                                );
+                              },
+                              child: CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(docc[index]["urlimg"]),
+                                radius: 24,
+                              ),
                             ),
                             SizedBox(
                               width: 12,
