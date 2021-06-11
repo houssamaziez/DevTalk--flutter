@@ -35,7 +35,7 @@ class MyHomePage extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    'Choose the group you want to know and\n share your information in it ',
+                    'Choose the specialty you are interested in\n share your information in it ',
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Expanded(

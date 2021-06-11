@@ -72,7 +72,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               },
               leading: Icon(Icons.person, color: widget.colorw),
               title: Text(
-                "Your Profile",
+                "Edit Profil",
                 style: TextStyle(color: widget.colorw),
               ),
             ),
@@ -150,7 +150,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               },
               leading: Icon(Icons.redeem, color: widget.colorw),
               title: Text(
-                "change filiare",
+                "Change Field",
                 style: TextStyle(color: widget.colorw),
               ),
             ),

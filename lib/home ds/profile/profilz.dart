@@ -54,7 +54,7 @@ class MyProfile extends StatelessWidget {
                                 style: TextStyle(fontSize: 22, color: colorw),
                               ),
                             Text(
-                              "Profile",
+                              "Profil",
                               style: TextStyle(fontSize: 22, color: colorw),
                             ),
                           ],

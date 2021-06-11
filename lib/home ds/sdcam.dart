@@ -46,6 +46,7 @@ class _MysdmsgState extends State<Myspublc> {
         "iduser": userdoc["user name"],
         "urlimg": userdoc["urlimag"],
         "id": userrr.uid,
+        "like": 1,
         "urlimgpubl": await ref.getDownloadURL(),
       },
     );

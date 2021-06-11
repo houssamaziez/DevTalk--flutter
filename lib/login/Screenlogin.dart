@@ -212,6 +212,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
           color: Color(0xFFCFCACA).withOpacity(0.4),
         ),
         child: TextFormField(
+          style: TextStyle(color: Colors.white),
           decoration: InputDecoration(
             border: OutlineInputBorder(
                 borderSide: BorderSide(
@@ -257,6 +258,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
           color: Color(0xFFCFCACA).withOpacity(0.4),
         ),
         child: TextFormField(
+          style: TextStyle(color: Colors.white),
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             border: OutlineInputBorder(
@@ -386,6 +388,7 @@ class _ScreenLoginState extends State<ScreenLogin> {
           color: Color(0xFFCFCACA).withOpacity(0.4),
         ),
         child: TextFormField(
+          style: TextStyle(color: Colors.white),
           obscureText: true,
           decoration: InputDecoration(
             border: OutlineInputBorder(

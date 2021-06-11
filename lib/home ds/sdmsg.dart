@@ -206,6 +206,7 @@ class _MysdmsgState extends State<Mysdmsg> {
             if (imagepht == null)
               Expanded(
                   child: TextField(
+                style: TextStyle(color: widget.colorw),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: widget.colorw),
