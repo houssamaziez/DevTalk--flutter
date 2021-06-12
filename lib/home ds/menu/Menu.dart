@@ -4,7 +4,7 @@ import 'package:f3/home%20ds/profile/profilz.dart';
 import 'package:f3/scaffold/MyScaffold.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foldable_sidebar/foldable_sidebar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomDrawer extends StatefulWidget {
   final Function closeDrawer;
@@ -140,7 +140,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
               color: Colors.grey,
             ),
             ListTile(
-              onTap: () {
+              onTap: () async {
+                var sevlng = await SharedPreferences.getInstance();
+                sevlng.clear();
                 Navigator.push(
                   context,
                   MaterialPageRoute<void>(
@@ -159,7 +161,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
               color: Colors.grey,
             ),
             ListTile(
-              onTap: () {},
+              onTap: () async {
+                var sevlng = await SharedPreferences.getInstance();
+                print(sevlng.getString("lang"));
+              },
               leading: Icon(Icons.save_sharp, color: widget.colorw),
               title: Text(
                 "save post ",

@@ -1,7 +1,8 @@
 import 'package:f3/home%20ds/Screenhome.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class CatigoryW extends StatelessWidget {
+class CatigoryW extends StatefulWidget {
   final String image;
   final String text;
   final Color color;
@@ -13,6 +14,40 @@ class CatigoryW extends StatelessWidget {
     this.color,
     this.lang,
   });
+
+  @override
+  _CatigoryWState createState() => _CatigoryWState();
+}
+
+class _CatigoryWState extends State<CatigoryW> {
+  getlang() async {
+    var sevlng = await SharedPreferences.getInstance();
+    var language = sevlng.getString("lang");
+    if (language != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => MyHome(
+            sevlng.getString("lang"),
+            sevlng.getString("image"),
+          ),
+        ),
+      );
+    }
+  }
+
+  sevlang(String lang, image) async {
+    var sevlng = await SharedPreferences.getInstance();
+    sevlng.setString("lang", lang);
+    sevlng.setString("image", image);
+  }
+
+  @override
+  void initState() {
+    getlang();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +69,15 @@ class CatigoryW extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: CircleAvatar(
-                backgroundColor: color,
+                backgroundColor: widget.color,
                 child: Image.network(
-                  image,
+                  widget.image,
                 ),
               ),
             ),
             Spacer(),
             Text(
-              text,
+              widget.text,
               style: TextStyle(color: Colors.black, fontSize: 20),
             ),
             SizedBox(
@@ -51,16 +86,25 @@ class CatigoryW extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => MyHome(
-              lang,
-              image,
+      onTap: () async {
+        var sevlng = await SharedPreferences.getInstance();
+
+        if (sevlng.getString("lang") == null) {
+          sevlang(
+            widget.lang,
+            widget.image,
+          );
+          print(sevlng.getString("lang"));
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) => MyHome(
+                widget.lang,
+                widget.image,
+              ),
             ),
-          ),
-        );
+          );
+        }
       },
     );
   }
